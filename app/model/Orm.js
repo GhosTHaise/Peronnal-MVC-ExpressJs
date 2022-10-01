@@ -1,14 +1,17 @@
 const cnx = require("./db");
-const select = (table,colonne,others) => {
-    let data_to_return = [];
-    cnx.query(`SELECT ${String(champ)} FROM ${colonne} ${others}`,(err,data)=>{
-        if(err){
 
-        }else{
-            data_to_return =  data;
-        }
-    });
-    return data_to_return;
+const select = async(colonne,table,others) => {
+
+    return new Promise((resolve,reject)=>{
+        cnx.query(`SELECT ${String(colonne)} FROM ${table} ${others} `,(err,data)=>{
+            //console.log(data);
+            if(err){
+                reject(err)
+            }else{
+               resolve(data)
+            }
+        });
+    })
 }
 
 const insert = (table,data) => {
@@ -19,7 +22,7 @@ const insert = (table,data) => {
         if(err){
 
         }else{
-            console.log("Les informationd ont bien ete enregistre dans la table : "+table);
+            console.log("Les informations ont bien ete enregistre dans la table : "+table);
         }
     });
 }

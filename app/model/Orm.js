@@ -14,25 +14,35 @@ const select = async(colonne,table,others) => {
     })
 }
 
-const insert = (table,data) => {
-    cnx.query(`
-            INSERT INTO ${String(Object.keys(data))} 
-            VALUES (${String(Object.values(data))}
-    `,(err,_) => {
-        if(err){
-
-        }else{
-            console.log("Les informations ont bien ete enregistre dans la table : "+table);
-        }
-    });
+const insert = async(table,data) => {
+   return new Promise((resolve,reject)=>{
+        cnx.query(`
+            INSERT INTO ${table} (${String(Object.keys(data))})
+            VALUES (?,?)
+        `,Object.values(data),(err,_) => {
+            if(err){
+                reject(err)
+            }else{
+                resolve("Les informations ont bien ete enregistre dans la table : "+table);
+            }
+        });
+   })
 }
 
-const remove = (table,others) => {
-    cnx.query(`DELETE FROM ${table} WHERE ${others}`,(err,_) => {
-        if(err){
-            console.log("Les informations ont bien ete supprimer");
-        }
-    });
+const remove = async(table,others) => {
+    return new Promise((resolve,reject) =>{
+        cnx.query(`DELETE FROM ${table} WHERE ${others}`,(err,_) => {
+            if(err){
+                resolve({
+                    message : "Les donnes ont bien ete supprimer."
+                })
+            }else{
+                reject({
+                    message : "Impossible de suprimer les donnees."
+                })
+            }
+        });
+    })
 }
 
 class ORM{

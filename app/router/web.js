@@ -5,6 +5,7 @@ const errorController = require("../controller/errorController");
 const InitWebRoute = (app) => {
 
     Router.get("/",formulaireController.homeView);
+    Router.post("/save",formulaireController.homeSave);
     app.use(Router);
 
 

@@ -1,15 +1,7 @@
 <%- include("components/header.ejs")  %> 
     <div style="height : 100vh;width:100vw;display:flex;flex-direction:column;justify-content:center;align-items:center;">
         <p style="font-size: 71px;">Home</p>
-        <!-- Test -->
-        <form action="/save" method="post">
-            <label for="login">Login</label>
-            <input value="<%= username %>" type="text" name="login" id="login">
-            <label for="password">Pasword</label>
-            <input type="text" name="password" id="password">
-            <button type="submit">Enregistrer</button>
-        </form>
-        <%= message %> 
+        <a style="font-size: 18px;" class="btn btn-secondary px-4 py-3" href="/disconnect">Deconnection</a>
         <!-- Test -->
     </div>
 <%- include("components/footer.ejs") %> 

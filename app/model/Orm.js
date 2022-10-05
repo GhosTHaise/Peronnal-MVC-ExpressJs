@@ -38,7 +38,7 @@ const remove = async(table,others) => {
                 })
             }else{
                 reject({
-                    message : "Impossible de suprimer les donnees."
+                    message : "Impossible de supprimer les donnees."
                 })
             }
         });

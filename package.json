@@ -9,7 +9,7 @@
     "scss" : "sass --watch app/views/static/styles/sass/style.scss app/views/static/styles/css/style.css"
   },
   "keywords": [],
-  "author": "",
+  "author": "GhosTHaise-Fitiavana*Sambatra",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",

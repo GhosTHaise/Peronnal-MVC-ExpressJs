@@ -5,6 +5,7 @@ const InitializeViewEngine = (app) => {
     console.log(__dirname)
     //view styles
     app.use("/styles",express.static("./app/views/static/styles/css"));
+    app.use("/scripts",express.static("./app/views/static/script"));
     
 }
 

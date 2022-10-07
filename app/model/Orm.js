@@ -18,7 +18,7 @@ const insert = async(table,data) => {
    return new Promise((resolve,reject)=>{
         cnx.query(`
             INSERT INTO ${table} (${String(Object.keys(data))})
-            VALUES (?,?)
+            VALUES (${"?,".repeat((Object.values(data).length) - 1)}?)
         `,Object.values(data),(err,_) => {
             if(err){
                 reject(err)
@@ -45,15 +45,32 @@ const remove = async(table,others) => {
     })
 }
 
+const update = async(table,values,other) => {
+    return new Promise((resolve,reject)=>{
+        cnx.query(`UPDATE ${table} SET ${values} WHERE ${other}`,(err,_)=>{
+            if(err){
+                resolve({
+                    message : "Les donnes ont bien ete mis a jour."
+                })
+            }else{
+                reject({
+                    message : "Impossible de mette a jour les donnees."
+                })
+            }
+        });
+    });
+}
+
 class ORM{
     //creation d'instance
     new(){
         return this;
     };
-    //method propre
+    //methode propre
     supprimer = remove
     inserer = insert
     recuperer = select
+    mettreAjour = update
 }
 
 module.exports = {

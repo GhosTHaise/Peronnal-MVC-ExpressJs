@@ -1,21 +1,5 @@
 const cnx = require("./db");
 
-const update = async(table,values,other) => {
-    return new Promise((resolve,reject)=>{
-        cnx.query(`UPDATE ${this.table_name} SET ${values} WHERE ${other}`,(err,_)=>{
-            if(err){
-                resolve({
-                    message : "Les donnes ont bien ete mis a jour."
-                })
-            }else{
-                reject({
-                    message : "Impossible de mette a jour les donnees."
-                })
-            }
-        });
-    });
-}
-
 class ORM{
     //creation d'instance
     constructor(model){
@@ -88,7 +72,21 @@ class ORM{
             });
         })
     }
-    mettreAjour = update
+    mettreAjour = async(table,values,other) => {
+        return new Promise((resolve,reject)=>{
+            cnx.query(`UPDATE ${this.table_name} SET ${values} WHERE ${other}`,(err,_)=>{
+                if(err){
+                    resolve({
+                        message : "Les donnes ont bien ete mis a jour."
+                    })
+                }else{
+                    reject({
+                        message : "Impossible de mette a jour les donnees."
+                    })
+                }
+            });
+        });
+    }
 }
 
 module.exports = {

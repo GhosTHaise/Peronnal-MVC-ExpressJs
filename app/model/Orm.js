@@ -2,14 +2,6 @@ const cnx = require("./db");
 
 class ORM{
     //creation d'instance
-    constructor(model){
-        this.table_name = model
-    }
-    new(){
-        return this;
-    };
-    //methode propre
-    //creation d'instance
     constructor(name){
         this.table_name = name
     }
@@ -32,7 +24,7 @@ class ORM{
             });
         })
     }
-    inserer = async(table,data) => {
+    inserer = async(data) => {
         return new Promise((resolve,reject)=>{
              cnx.query(`
                  INSERT INTO ${this.table_name} (${String(Object.keys(data))})
@@ -59,7 +51,7 @@ class ORM{
             });
         })
     }
-    recuperer = async(colonne,table,others) => {
+    recuperer = async(colonne,others) => {
         return new Promise((resolve,reject)=>{
             cnx.query(`SELECT ${String(colonne)} FROM ${this.table_name} ${others} `,(err,data,fields)=>{
                 //console.log(data);
@@ -72,7 +64,7 @@ class ORM{
             });
         })
     }
-    mettreAjour = async(table,values,other) => {
+    mettreAjour = async(values,other) => {
         return new Promise((resolve,reject)=>{
             cnx.query(`UPDATE ${this.table_name} SET ${values} WHERE ${other}`,(err,_)=>{
                 if(err){

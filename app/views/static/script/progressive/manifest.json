@@ -1,0 +1,17 @@
+{
+    "name" : "Change_this_to_the_name_of_the_app",
+    "icons" : [
+        {
+            "src" : "/icons/512.png",
+            "type" : "image/png",
+            "sizes" : "512x512"
+        },
+        {
+            "src" : "/icons/192.png",
+            "type" : "image/png",
+            "sizes" : "192x192"
+        }
+    ],
+    "start_url" : "/?source=pwa",
+    "display" : "standalone"
+}

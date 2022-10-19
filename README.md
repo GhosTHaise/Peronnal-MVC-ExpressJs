@@ -1,5 +1,7 @@
 #MVC with expressJS by Ghost
 
+Ceci est un template de MVC realise avec nodejs supportant un service worker
+
 Install all dependencies with : 
 ```shell
     npm install

@@ -5,7 +5,8 @@ const InitWebRoute = require("./router/web");
 require("dotenv").config();
 const session = require("express-session");
 const app = express(),
-      PORT = process.env.PORT || 4001    
+      PORT = process.env.PORT || 4001,
+      HTTPS_PORT = process.HTTPS_PORT || 443
 ;
 
 //middleware

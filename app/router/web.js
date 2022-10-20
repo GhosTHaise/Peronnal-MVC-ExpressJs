@@ -3,7 +3,13 @@ const Router = express.Router();
 const homeController = require("../controller/homeController");
 const errorController = require("../controller/errorController");
 const InitWebRoute = (app) => {
-    
+    //https
+    app.use((req,res,next)=>{
+        if(!req.secure){
+            return res.redirect("https://"+req.headers.host+req.url)
+        }
+        next();
+    })
     //Home Route
     Router.get("/",homeController.homeView);
     app.use(Router);

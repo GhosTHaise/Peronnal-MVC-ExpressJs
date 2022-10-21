@@ -6,7 +6,9 @@ const InitializeViewEngine = (app) => {
     //view styles
     app.use("/styles",express.static("./app/views/static/styles/css"));
     app.use("/scripts",express.static("./app/views/static/script"));
-    app.use("/icons",express.static("./app/views/static/icons"))
+    app.use("/icons",express.static("./app/views/static/icons"));
+    //serviceWorker
+    app.use("/serviceWorker",express.static("./app/views/static/script/progressive/sw.js"));
     
 }
 

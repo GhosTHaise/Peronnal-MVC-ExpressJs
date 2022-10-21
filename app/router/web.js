@@ -5,6 +5,7 @@ const errorController = require("../controller/errorController");
 const InitWebRoute = (app) => {
     //https
     app.use((req,res,next)=>{
+        console.log("Request is secure ? :"+req.secure)
         if(!req.secure){
             return res.redirect("https://"+req.headers.host+req.url)
         }

@@ -3,7 +3,12 @@ const homeView = (req,res) => {
         
     })
 }
+const offlineView = (req,res) => {
+    res.render("offline",{
 
+    });
+}
 module.exports = {
-    homeView
+    homeView,
+    offlineView
 }

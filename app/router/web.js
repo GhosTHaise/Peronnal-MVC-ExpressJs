@@ -13,6 +13,9 @@ const InitWebRoute = (app) => {
     })
     //Home Route
     Router.get("/",homeController.homeView);
+    Router.get("/offline-service-worker-template",homeController.offlineView)
+    //Home Route END
+
     app.use(Router);
 
 

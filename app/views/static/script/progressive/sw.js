@@ -5,7 +5,9 @@ const CACHED_FILE = [
     "https://fonts.googleapis.com/css2?family=Raleway&display=swap",
     "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 ]
+const LAZY_CACHE = [
 
+]
 //Jouer avec offline
 self.addEventListener("install",(event)=>{
   self.skipWaiting();
@@ -36,11 +38,12 @@ self.addEventListener("fetch",(event)=>{
   console.log(`Fetching : ${PREFIX}`);
   if(event.request.mode === "navigate"){
     event.respondWith((async()=>{
-      //console.log("my requsets",event);
+      console.log("my requsets",event);
       //console.log("caches : ",caches)
       console.log("I am fetching : ",PREFIX);
       try{
           const preloadResponse = await event.preloadResponse;
+          console.log("preload :",preloadResponse)
           if(preloadResponse){
             return preloadResponse
           }
@@ -52,6 +55,26 @@ self.addEventListener("fetch",(event)=>{
     })())
   }else if(CACHED_FILE.includes(event.request.url)){
       event.respondWith(caches.match(event.request.url))
+  }else if(LAZY_CACHE.includes(event.request.url)){
+    event.respondWith((async()=>{
+      //console.log("my requsets",event);
+      //console.log("caches : ",caches)
+      console.log("I am fetching : ",PREFIX);
+      try{
+          const cache = await caches.open(PREFIX);
+          const preloadResponse = await event.preloadResponse;
+          if(preloadResponse){
+            cache.put(event.request,preloadResponse.clone());
+            return preloadResponse
+          }
+          const networkResponse =  await fetch(event.request);
+          cache.put(event.request,networkResponse.clone());
+          return networkResponse;
+      }catch(e){
+        const cache = await caches.open(PREFIX);
+        return await cache.match(event.request);
+      }
+    })())
   }
 });
 

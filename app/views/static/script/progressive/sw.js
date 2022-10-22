@@ -1,16 +1,34 @@
-const PREFIX = "v5"
+const PREFIX = "v3";
+const CACHED_FILE = [
+    "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css",
+    "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js",
+    "https://fonts.googleapis.com/css2?family=Raleway&display=swap",
+    "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+]
+
 //Jouer avec offline
 self.addEventListener("install",(event)=>{
   self.skipWaiting();
   event.waitUntil((async() => {
         const cache = await caches.open(PREFIX);
-        cache.add(new Request("/offline-service-worker-template"))
+        await Promise.all([...CACHED_FILE,"/offline-service-worker-template"].map( path => {
+              return cache.add(new Request(path));
+        }))
     }
   )());
   console.log(`Install : ${PREFIX}`);
 })
-self.addEventListener("activate",()=>{
-  clients.claim()
+self.addEventListener("activate",(event)=>{
+  clients.claim();
+  event.waitUntil((async ()=>{
+    const keys = await caches.keys();
+    await Promise.all(
+      keys.map( key => {
+        if(!key.includes(PREFIX)){
+          return caches.delete(key);
+        }
+    }));
+  }) ())
   console.log(`Activate : ${PREFIX}`);
 })
 self.addEventListener("fetch",(event)=>{
@@ -18,7 +36,9 @@ self.addEventListener("fetch",(event)=>{
   console.log(`Fetching : ${PREFIX}`);
   if(event.request.mode === "navigate"){
     event.respondWith((async()=>{
-      //  console.log("my requsets",event)
+      //console.log("my requsets",event);
+      //console.log("caches : ",caches)
+      console.log("I am fetching : ",PREFIX);
       try{
           const preloadResponse = await event.preloadResponse;
           if(preloadResponse){
@@ -26,9 +46,12 @@ self.addEventListener("fetch",(event)=>{
           }
           return await fetch(event.request);
       }catch(e){
-        return new Response("Bonjour les gens")
+        const cache = await caches.open(PREFIX);
+        return await cache.match("/offline-service-worker-template");
       }
     })())
+  }else if(CACHED_FILE.includes(event.request.url)){
+      event.respondWith(caches.match(event.request.url))
   }
 });
 

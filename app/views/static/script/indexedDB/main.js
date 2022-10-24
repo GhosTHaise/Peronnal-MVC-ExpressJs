@@ -9,24 +9,28 @@ const indexedDb =
 
 class indexed{
     constructor(name,schema,mode){
-        const request = indexedDb.open("data_Database",VERSION);
-        request.onerror = (event) => {
+        this.collection = indexedDb.open("data_Database",VERSION);
+        this.store = "adasd" 
+        this.collection.onerror = (event) => {
             console.log("An arror occured with indexedDB");
             console.log(event);
         }
-        request.onupgradeneeded = () => {
-            const db = request.result,
-            reference = db.createObjectStore(name,{keyPath : "id"}),
-            transaction = reference.transaction(name,mode || "readonly"),
-            store = transaction.objectStore(name);
-            this.call = {
-                stocker : (data) =>{
-                     store.put(data)
-                },
-                fermer : () => {
-                    db.close()
-                }
-            }
+        this.collection.onupgradeneeded = () => {
+            console.log("Initilize indexedDb");
+            const db = this.collection.result;
+            const store = db.createObjectStore(name,{keyPath : "id"});
+            store.createIndex("name",["name"],{unique : false});
         }
+        this.collection.onsuccess = () => {
+            console.log("success");
+            const db = this.collection.result;
+            const transaction = db.transaction(name,mode || "readonly");
+            indexed.store = transaction.objectStore(name);
+            console.log("intenceed :");
+        }
+    }
+    stocker(data){
+        console.log("The store object :",indexed.stores)
+        this.store && this.store.put(data)
     }
 }

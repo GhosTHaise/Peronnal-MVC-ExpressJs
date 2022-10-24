@@ -6,14 +6,27 @@ const indexedDb =
     window.msIndexedDB || 
     window.shimIndexedDB;
 
-const request = indexedDb.open("data_Database",VERSION);
-request.onerror = (event) => {
-    console.log("An arror occured with indexedDB");
-    console.log(event);
-}
-request.onupgradeneeded = () => {
-    const db = request.result;
-    const store = db.createObjectStore("cars",{keyPath : "id"});
-    store.createIndex("cars_colour",["colour"],{unique: false});
-    store.createIndex("colour_and_make",["colour","make"],{unique : false});
+
+class indexed{
+    constructor(name,schema,mode){
+        const request = indexedDb.open("data_Database",VERSION);
+        request.onerror = (event) => {
+            console.log("An arror occured with indexedDB");
+            console.log(event);
+        }
+        request.onupgradeneeded = () => {
+            const db = request.result,
+            reference = db.createObjectStore(name,{keyPath : "id"}),
+            transaction = reference.transaction(name,mode || "readonly"),
+            store = transaction.objectStore(name);
+            this.call = {
+                stocker : (data) =>{
+                     store.put(data)
+                },
+                fermer : () => {
+                    db.close()
+                }
+            }
+        }
+    }
 }

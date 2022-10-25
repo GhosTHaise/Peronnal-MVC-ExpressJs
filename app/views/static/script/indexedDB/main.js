@@ -10,7 +10,9 @@ const indexedDb =
 class indexed{
     constructor(name,schema,mode){
         this.collection = indexedDb.open("data_Database",VERSION);
-        this.store = "adasd" 
+        this.name = name;
+        this.mode = mode;
+
         this.collection.onerror = (event) => {
             console.log("An arror occured with indexedDB");
             console.log(event);
@@ -21,16 +23,20 @@ class indexed{
             const store = db.createObjectStore(name,{keyPath : "id"});
             store.createIndex("name",["name"],{unique : false});
         }
-        this.collection.onsuccess = () => {
-            console.log("success");
-            const db = this.collection.result;
-            const transaction = db.transaction(name,mode || "readonly");
-            indexed.store = transaction.objectStore(name);
-            console.log("intenceed :");
+    }
+    callMethod = {
+        save : (data) => {
+            this.collection.onsuccess = () => {
+                const db = this.collection.result;
+                const transaction = db.transaction(this.name,this.mode || "readonly");
+                this.store = transaction.objectStore(this.name);
+                this.store && this.store.put(data)
+                console.log("The store object :",this.store);
+            }
+        },
+        getAllValue : () => {
+            
         }
     }
-    stocker(data){
-        console.log("The store object :",indexed.stores)
-        this.store && this.store.put(data)
-    }
+    
 }

@@ -4,5 +4,4 @@ console.table([
     }
 ]);
 const indexeds = new indexed("test",{},"readwrite");
-indexeds.stocker({name : "Fitiavana",prenom : "sambatra"})
-console.log(indexeds)
+indexeds.callMethod.save({id: 2,name : "GhosT",prenom : "Haise"});

@@ -1,7 +1,7 @@
 const cnx = require("./db");
 
 class ORM{
-    //creation d'instance
+    //creation d'instance , Preciser le table name
     constructor(name){
         this.table_name = name
     }
@@ -38,19 +38,6 @@ class ORM{
              });
         })
      }
-    recuperer = async(colonne,others) => {
-        return new Promise((resolve,reject)=>{
-            cnx.query(`SELECT ${String(colonne)} FROM ${this.table_name} ${others} `,(err,data,fields)=>{
-                //console.log(data);
-                if(err){
-                    reject(err)
-                }else{
-                //console.log("data : ",data,"fields :",fields);
-                   resolve(data)
-                }
-            });
-        })
-    }
     recuperer = async(colonne,others) => {
         return new Promise((resolve,reject)=>{
             cnx.query(`SELECT ${String(colonne)} FROM ${this.table_name} ${others} `,(err,data,fields)=>{

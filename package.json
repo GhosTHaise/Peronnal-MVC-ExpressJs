@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app/server.js & npm run scss",
-    "scss" : "sass --watch app/views/static/styles/sass/style.scss app/views/static/styles/css/style.css"
+    "start": "nodemon app/server.js & npm run scss &npm run postcss",
+    "scss": "sass --watch app/views/static/styles/sass/style.scss app/views/static/styles/css/style.css",
+    "postcss" : "npx tailwind build -i app/views/static/styles/css/style.css -o app/views/static/styles/css/dist/output.css --watch"
   },
   "keywords": [],
   "author": "GhosTHaise-Fitiavana*Sambatra",
@@ -19,5 +20,8 @@
     "express-session": "^1.17.3",
     "mysql": "^2.18.1",
     "node-sass-middleware": "^1.0.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
   }
 }

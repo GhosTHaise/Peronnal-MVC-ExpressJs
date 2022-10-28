@@ -1,11 +1,12 @@
-const PREFIX = "v6";
+const PREFIX = "v1.2.0";
+const BASE = `${location.protocol}//${location.host}`;
 const CACHED_FILE = [
     //Uncomment this to save bootstrap in the cache
     //"https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css",
     //"https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js",
     "https://fonts.googleapis.com/css2?family=Raleway&display=swap",
     "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
-    "/styles/dist/output.css"
+    `${BASE}/styles/dist/output.css`
 ]
 const LAZY_CACHE = [
 

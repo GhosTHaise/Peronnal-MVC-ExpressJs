@@ -5,9 +5,11 @@ console.table([
 ]);
 const indexeds = new indexed("test",{},"readwrite");
 indexeds.callMethod.save({id: 2,name : "GhosT",prenom : "Haise"});
+
 window.addEventListener("online",()=>{
-    alert("You are online !");
+    history.go(-1);
 })
 window.addEventListener("offline",()=>{
-    alert("You are offline !");
+    history.go(0);
+    alert("You are offline")
 })

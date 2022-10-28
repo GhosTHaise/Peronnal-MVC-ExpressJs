@@ -4,11 +4,11 @@ Ceci est un template de MVC realise avec nodejs supportant un service worker
 
 Install all dependencies with : 
 ```shell
-    npm install
+    ./Initialization.sh
 ```
-To run the project you need to to install global sass : 
+Or if you will use this for only build api , run : 
 ```shell
-    npm install -g sass
+    ./InitializationOnlyApi.sh
 ```
 
 #To work with HTTPS

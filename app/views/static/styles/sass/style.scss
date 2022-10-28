@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 %default-center{
     display:flex;
     flex-direction:column;
@@ -31,7 +35,9 @@ body{
     }
 }
 
-
+.center-element{
+    @apply flex justify-center items-center h-screen w-screen
+}
 .Erreur{
     margin-top : 41px;
 }

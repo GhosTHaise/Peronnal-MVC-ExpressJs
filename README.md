@@ -1,8 +1,8 @@
-<h2>MVC with expressJS by <span style="color:#0284c7">Ghost 👻<span></h2>
+<h2>MVC with expressJS by <span>Ghost 👻<span></h2>
 
 Ceci est un template de MVC realise avec nodejs supportant un service worker
 
-Install all dependencies with : 
+> Install all dependencies with : 
 ```shell
     ./Initialization.sh
 ```
@@ -11,7 +11,7 @@ Or if you will use this for only build api , run :
     ./InitializationOnlyApi.sh
 ```
 
-#To work with HTTPS
+> To work with HTTPS
 Generate SSL with : 
 ```shell
 openssl req -x509 -out localhost.crt -keyout localhost.key \

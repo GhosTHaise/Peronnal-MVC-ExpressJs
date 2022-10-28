@@ -1,4 +1,4 @@
-#MVC with expressJS by Ghost
+<h2>MVC with expressJS by <span>Ghost 👻<span></h2>
 
 Ceci est un template de MVC realise avec nodejs supportant un service worker
 

@@ -1,12 +1,13 @@
-Fair Source License, version 0.9
+                    Fair Source License
+                        version 0.9
 
-Copyright (C) [2022] [GhosTCorp]
+Copyright (C) 2022 GhosTCorp
 
-Licensor: [RANDRIAMBOLOLOMANANA Nomentsoa Sambatra Fitiavana]
+Licensor: RANDRIAMBOLOLOMANANA Nomentsoa Sambatra Fitiavana
 
-Software: [ Peronnal-MVC-ExpressJs]
+Software: Peronnal-MVC-ExpressJs
 
-Use Limitation: [1] users
+Use Limitation: 1 users
 
 License Grant. Licensor hereby grants to each recipient of the
 Software ("you") a non-exclusive, non-transferable, royalty-free and

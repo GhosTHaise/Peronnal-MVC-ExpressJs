@@ -3,13 +3,14 @@ console.table([
         import : "script.js" 
     }
 ]);
-const indexeds = new indexed("test",{},"readwrite");
-indexeds.callMethod.save({id: 2,name : "GhosT",prenom : "Haise"});
-
+/* const indexeds = new indexed("test",{},"readwrite");
+indexeds.callMethod.save({id: 2,name : "GhosT",prenom : "Haise"}); */
+const refresh  = () => {
+    location.reload();
+}
 window.addEventListener("online",()=>{
-    history.go(-1);
+    refresh();
 })
 window.addEventListener("offline",()=>{
-    history.go(0);
-    alert("You are offline")
+    refresh();
 })

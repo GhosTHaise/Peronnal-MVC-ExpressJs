@@ -7,6 +7,7 @@ const CACHED_FILE = [
     "https://fonts.googleapis.com/css2?family=Raleway&display=swap",
     "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
     `${BASE}/styles/dist/output.css`,
+    `${BASE}/scripts/plugins/onlineOffline.js`
     `${BASE}/scripts/script.js`
 ]
 const LAZY_CACHE = [

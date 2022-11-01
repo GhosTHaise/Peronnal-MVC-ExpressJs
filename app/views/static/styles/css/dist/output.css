@@ -557,10 +557,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
 .ml-6 {
   margin-left: 1.5rem;
 }
@@ -588,8 +584,8 @@ video {
   text-align: center;
 }
 
-.text-6xl {
-  font-size: 3.75rem;
+.text-5xl {
+  font-size: 3rem;
   line-height: 1;
 }
 
@@ -598,13 +594,8 @@ video {
   line-height: 1.75rem;
 }
 
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
+.text-6xl {
+  font-size: 3.75rem;
   line-height: 1;
 }
 

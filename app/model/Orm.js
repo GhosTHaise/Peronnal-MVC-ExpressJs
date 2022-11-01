@@ -1,6 +1,7 @@
 const cnx = require("./db");
 
-class ORM{
+
+class ORM_MYSQL{
     //creation d'instance , Preciser le table name
     constructor(name){
         this.table_name = name
@@ -11,7 +12,7 @@ class ORM{
     //method propre
     supprimer = async(others) => {
         return new Promise((resolve,reject) =>{
-            cnx.query(`DELETE FROM ${this.table_name} WHERE ${others}`,(err,_) => {
+            cnx?.connexion.query(`DELETE FROM ${this.table_name} WHERE ${others}`,(err,_) => {
                 if(err){
                     reject({
                         message : "Impossible de supprimer les donnees."
@@ -26,7 +27,7 @@ class ORM{
     }
     inserer = async(data) => {
         return new Promise((resolve,reject)=>{
-             cnx.query(`
+             cnx?.connexion.query(`
                  INSERT INTO ${this.table_name} (${String(Object.keys(data))})
                  VALUES (?,?)
              `,Object.values(data),(err,_) => {
@@ -40,7 +41,7 @@ class ORM{
      }
     recuperer = async(colonne,others) => {
         return new Promise((resolve,reject)=>{
-            cnx.query(`SELECT ${String(colonne)} FROM ${this.table_name} ${others} `,(err,data,fields)=>{
+            cnx?.connexion.query(`SELECT ${String(colonne)} FROM ${this.table_name} ${others} `,(err,data,fields)=>{
                 //console.log(data);
                 if(err){
                     reject(err)
@@ -53,7 +54,7 @@ class ORM{
     }
     mettreAjour = async(values,other) => {
         return new Promise((resolve,reject)=>{
-            cnx.query(`UPDATE ${this.table_name} SET ${values} WHERE ${other}`,(err,_)=>{
+            cnx?.connexion.query(`UPDATE ${this.table_name} SET ${values} WHERE ${other}`,(err,_)=>{
                 if(err){
                     resolve({
                         message : "Les donnes ont bien ete mis a jour."
@@ -67,7 +68,11 @@ class ORM{
         });
     }
 }
-
+class ORM_MOMGO_DB {
+    
+}
 module.exports = {
-    ORM
+    ORM : (cnx.type) ? ((nx.type == "Mysql") ? ORM_MYSQL : ORM_MOMGO_DB) : () => {
+        throw Error("Impossible de trouver l'ORM qui convient a votre base de donnees");
+    }
 }
